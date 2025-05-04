@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+:root {
+  --clr-primary: #0d1017;
+  --clr-secondary: #7407FC;
+  --clr-accent: #99FFFF;
+
+  --text-light-100: #9198a1;
+  --text-light-500: #f0f6fc;
+
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, html, body {
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #0d1017;
+  z-index: 2;
+}
+
+body {
+  padding: 12px 8px;
+}
+
+html, body {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.layer-blur {
+  position: fixed;
+  bottom: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  border-radius: 100%;
+  background-image: linear-gradient(to right, #0DD772, #25728E);
+  filter: blur(222px);
+  opacity: .57;
+  z-index: -2;
+  will-change: filter, transform;
+}
