@@ -8,6 +8,9 @@ type TopRepo = {
     fork: boolean;
     html_url: string;
     language: string;
+    languages: {
+        [key: string]: number
+    }
     stargazers_count: number;
     watchers_count: number;
     updated_at: string;
@@ -59,6 +62,9 @@ const Repo: React.FC<{ repo: TopRepo }> = ({ repo }) => {
         return languageColors[language as keyof typeof languageColors] || '--clr-secondary';
     }
 
+    const language = (repo.language && repo.language.trim()) ||
+        Object.keys(repo.languages ?? {})[0] ||
+        ''
     return (
         <div className="repo-item flex flex-col justify-between w-full">
             <div className="mb-2">
@@ -68,11 +74,19 @@ const Repo: React.FC<{ repo: TopRepo }> = ({ repo }) => {
                 </div>
                 {repo.description && <div className="repo-description mt-2 mb-1 text-sm text-(--text-light-500)">{repo.description}</div>}
                 <div className="block mt-2">
-                    <span className='repo-language-name mr-4'>
-                        <span className="repo-language-color h-3 w-3 top-0.5 list-disc rounded-full border inline-block relative border-[#ffffff56] mr-1" style={{ backgroundColor: getColorCode(repo.language) }}></span>
-                        <span className="text-sm/[18px] text-(--text-light-100)">{repo.language}</span>
-                    </span>
-                    {repo.license.name && <span className="repo-license-name mr-4 text-sm/[18px] list-disc text-(--text-light-100)">{repo.license.name}</span>}
+                    {language && <span className='repo-language-name mr-4'>
+                        <span className="repo-language-color h-3 w-3 top-0.5 list-disc rounded-full border inline-block relative border-[#ffffff56] mr-1" style={{ backgroundColor: getColorCode(language) }}></span>
+                        <span className="text-sm/[18px] text-(--text-light-100)">{language}</span>
+                    </span>}
+                    {repo.license.name &&
+                        <span className="repo-license-name mr-4 list-disc inline-block text-sm/[18px] text-(--text-light-100)">
+                            {/* <span className="mr-1"> */}
+                            <svg className='mr-2 inline-block align-middle' aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" fill='currentColor' width="16" >
+                                <path d="M8.75.75V2h.985c.304 0 .603.08.867.231l1.29.736c.038.022.08.033.124.033h2.234a.75.75 0 0 1 0 1.5h-.427l2.111 4.692a.75.75 0 0 1-.154.838l-.53-.53.529.531-.001.002-.002.002-.006.006-.006.005-.01.01-.045.04c-.21.176-.441.327-.686.45C14.556 10.78 13.88 11 13 11a4.498 4.498 0 0 1-2.023-.454 3.544 3.544 0 0 1-.686-.45l-.045-.04-.016-.015-.006-.006-.004-.004v-.001a.75.75 0 0 1-.154-.838L12.178 4.5h-.162c-.305 0-.604-.079-.868-.231l-1.29-.736a.245.245 0 0 0-.124-.033H8.75V13h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V3.5h-.984a.245.245 0 0 0-.124.033l-1.289.737c-.265.15-.564.23-.869.23h-.162l2.112 4.692a.75.75 0 0 1-.154.838l-.53-.53.529.531-.001.002-.002.002-.006.006-.016.015-.045.04c-.21.176-.441.327-.686.45C4.556 10.78 3.88 11 3 11a4.498 4.498 0 0 1-2.023-.454 3.544 3.544 0 0 1-.686-.45l-.045-.04-.016-.015-.006-.006-.004-.004v-.001a.75.75 0 0 1-.154-.838L2.178 4.5H1.75a.75.75 0 0 1 0-1.5h2.234a.249.249 0 0 0 .125-.033l1.288-.737c.265-.15.564-.23.869-.23h.984V.75a.75.75 0 0 1 1.5 0Zm2.945 8.477c.285.135.718.273 1.305.273s1.02-.138 1.305-.273L13 6.327Zm-10 0c.285.135.718.273 1.305.273s1.02-.138 1.305-.273L3 6.327Z"></path>
+                            </svg>
+                            {/* </span> */}
+                            {repo.license.name}
+                        </span>}
                     <span className="repo-updated-at text-sm/[18px] list-disc text-(--text-light-100)">{formatDate(repo.updated_at)}</span>
                 </div>
             </div>
