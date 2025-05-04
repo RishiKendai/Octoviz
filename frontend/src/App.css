@@ -1,0 +1,27 @@
+.title {
+  font-weight: 700;
+  font-size: 42px;
+  text-align: center;
+  margin: 1.25rem 0;
+
+  span {
+    background: -webkit-linear-gradient(var(--clr-secondary), var(--clr-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+input {
+  outline: none;
+  border: 1px solid #7A9AB522;
+  color: #fff;
+  background: #CABBCD17;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  backdrop-filter: blur(53px);
+  border-radius: 5px;
+  padding: 14px 10px;
+  font-size: 0.875rem;
+  line-height: 0.75rem;
+  padding: 6px 12px;
+}

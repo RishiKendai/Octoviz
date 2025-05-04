@@ -1,0 +1,51 @@
+.transparent {
+    background: none !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 1rem;
+    display: flex;
+}
+
+.timeline-item::before {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.timeline-badge {
+    height: 16px;
+    width: 32px;
+    position: relative;
+    margin-left: -7.364px;
+    margin-right: 6px;
+}
+
+.event-dot-fill {
+    fill: #3d444d;
+}
+
+.timeline-timestamp {
+    font-size: 0.75rem;
+    color: #ffffff73;
+    margin-bottom: 5px;
+}
+
+.timeline-event {
+    font-size: 0.875rem;
+    color: #ffffffec;
+}

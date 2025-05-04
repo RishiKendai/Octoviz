@@ -1,0 +1,25 @@
+.bio {
+    /* width: 260px; */
+
+    .txt-wrapper {
+        margin-bottom: 12px;
+
+        span {
+            color: #ffffffac;
+            font-size: 1rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        span::first-letter {
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 0;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+    }
+}

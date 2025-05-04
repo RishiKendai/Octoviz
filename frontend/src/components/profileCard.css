@@ -1,0 +1,22 @@
+.title {
+    span {
+        background: -webkit-linear-gradient(var(--clr-secondary), var(--clr-accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+.profile-card {
+    height: 192px;
+    width: 336px;
+    padding: 24px;
+    border-radius: 14px;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.1px);
+    -webkit-backdrop-filter: blur(9.1px);
+    border: 1px solid rgba(255, 255, 255, 0.19);
+}
