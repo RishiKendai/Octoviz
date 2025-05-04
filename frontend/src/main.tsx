@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import { Toaster } from 'sonner'
 import Profile from './pages/Profile.tsx'
 import Notfound from './pages/Notfound.tsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path='*' element={<Notfound />} />
         </Routes>
         <div className="layer-blur"></div>
+        <Toaster position='bottom-left' />
       </BrowserRouter>
     </QueryClientProvider>
   </StrictMode>,
