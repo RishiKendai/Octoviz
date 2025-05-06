@@ -19,7 +19,9 @@ createRoot(document.getElementById('root')!).render(
           <Route path='/profile/:github_user' element={<Profile />} />
           <Route path='*' element={<Notfound />} />
         </Routes>
+        <div className="layer-wrapper">
         <div className="layer-blur"></div>
+        </div>
         <Toaster position='bottom-left' />
       </BrowserRouter>
     </QueryClientProvider>
