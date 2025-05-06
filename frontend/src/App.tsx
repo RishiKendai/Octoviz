@@ -18,7 +18,7 @@ function App() {
       <div className="w-full md:w-auto flex justify-center px-2">
         <Search onsearch={handleSearch} classes='w-full' />
       </div>
-      <div className="w-full md:w-auto px-2 flex flex-col mt-2">
+      <div className="w-full md:w-auto px-2 flex flex-col mt-3.5">
         <span className='flex justify-center px-2 w-full md:w-[561px] lg:w-[746px] text-center text-(--text-light-100)'>
           A developer profile analyzer that visualizes a GitHub user’s public data — including top repositories, languages, contribution activity, and more.
         </span>

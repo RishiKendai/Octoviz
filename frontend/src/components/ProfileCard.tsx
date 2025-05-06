@@ -6,6 +6,45 @@ import GhProfile from '../assets/gh-profile.png';
 import moment from 'moment';
 import { formatNumber } from './utils/helper';
 
+const codingStyleInfo = {
+    'Night Owl':
+    {
+        title: 'Most activity between 10 PM – 4 AM',
+        description: 'You tend to be most productive late at night, often working during quiet hours.'
+    },
+    'Early Bird':
+    {
+        title: 'Most activity between 4 AM – 10 AM',
+        description: "You're an early riser and prefer to start your day with coding before most people are awake."
+    },
+    'Sun Chaser':
+    {
+        title: 'Most activity between 10 AM – 4 PM',
+        description: "You follow the typical daytime schedule for coding, working during regular business hours."
+    },
+    'Evening Wanderer':
+    {
+        title: 'Most activity between 4 PM – 10 PM',
+        description: "Your coding sessions are mostly in the evening, where you find your energy to be the highest."
+    },
+    'Frozen Dev':
+    {
+        title: 'Low activity (30 days)',
+        description: "You haven't been active much lately—your development activity has been frozen for a while."
+    },
+    'Code Sleeper':
+    {
+        title: 'Low activity (15 days)',
+        description: `You've been somewhat active, but your recent activity has slowed down—a bit like "sleeping" from coding.`
+    },
+    'Repo Ghost':
+    {
+        title: 'Active but scattered',
+        description: `Are you still active, but your coding times and consistency are unclear, like a "ghost" who haunts the repo.`
+    }
+}
+
+
 function ProfileCard({ profile }: { profile: ProfileCard }): JSX.Element {
     return (
         <div className='mb-6 flex flex-col'>
@@ -33,7 +72,17 @@ function ProfileCard({ profile }: { profile: ProfileCard }): JSX.Element {
                 <div data-layout="right" className="basis-[60%]">
                     <h6 className='mb-0 text-lg'>{profile.name || '<Undefined />'}</h6>
                     <span className='block mb-1.5 wrap-break-word text-xs text-(--text-light-100)'>@{profile.aka}</span>
-                    <span className='text-sm'>{profile.coding_habit}</span>
+                    <span className='text-md font-semibold text-(--clr-accent)'>
+                        {profile.coding_habit}
+                        <svg className='inline ml-2 font-bold relative coding-habit-icon' xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0,0,256,256">
+                            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style={{ mixBlendMode: "normal" }}><g transform="scale(3,3)"><path d="M25,2c-12.6907,0 -23,10.3093 -23,23c0,12.69071 10.3093,23 23,23c12.69071,0 23,-10.30929 23,-23c0,-12.6907 -10.30929,-23 -23,-23zM25,4c11.60982,0 21,9.39018 21,21c0,11.60982 -9.39018,21 -21,21c-11.60982,0 -21,-9.39018 -21,-21c0,-11.60982 9.39018,-21 21,-21zM25,11c-1.65685,0 -3,1.34315 -3,3c0,1.65685 1.34315,3 3,3c1.65685,0 3,-1.34315 3,-3c0,-1.65685 -1.34315,-3 -3,-3zM21,21v2h1h1v13h-1h-1v2h1h1h4h1h1v-2h-1h-1v-15h-1h-4z"></path></g></g>
+                        </svg>
+
+                        <span className='coding-style-info'>
+                            <span className='title'>{codingStyleInfo[profile.coding_habit as keyof typeof codingStyleInfo].title}</span>
+                            <span className='description'>{codingStyleInfo[profile.coding_habit as keyof typeof codingStyleInfo].description}</span>
+                        </span>
+                    </span>
                     <div className='flex mt-4'>
                         <span className='border-r border-[#9198a136] pr-3'>
                             <span className='block text-base'>{formatNumber(profile.repos)}</span>
