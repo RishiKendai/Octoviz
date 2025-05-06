@@ -14,7 +14,9 @@ import type { Profile } from '../components/types/profile'
 
 
 const fetchData = async (github_user: string): Promise<Profile> => {
-    const response = await fetch(`https://c5t64pql-5673.inc1.devtunnels.ms/profile/${github_user}`);
+    const apiURL = import.meta.env.VITE_API_URL
+    console.log(`${apiURL}/profile/${github_user}`)
+    const response = await fetch(`${apiURL}/profile/${github_user}`);
     if (!response.ok) {
         if (response.status === 404) {
             throw new Error('User not found');
