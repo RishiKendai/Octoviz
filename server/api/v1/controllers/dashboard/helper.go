@@ -237,11 +237,12 @@ func classifyCodingHabit(events []Events) string {
 		return maxCategory
 	}
 
-	if recent15Count < 10 {
-		return "Code Sleeper"
-	}
 	if recent30Count < 10 {
 		return "Frozen Dev"
+	}
+
+	if recent15Count < 10 {
+		return "Code Sleeper"
 	}
 	return "Repo Ghost"
 }
