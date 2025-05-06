@@ -1,13 +1,8 @@
 {
-    "routes": [
-        {
-            "src": "/",
-            "dest": "/"
-        },
-        {
-            "src": "/profile/(.*)",
-            "dest": "/"
-        },
-        { "src": "/(.*)", "dest": "/" }
-    ]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
 }
