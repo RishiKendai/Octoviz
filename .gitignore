@@ -28,5 +28,3 @@ dist-ssr
 # Server
 tmp/
 .env
-final_response4.json
-final_response.json
