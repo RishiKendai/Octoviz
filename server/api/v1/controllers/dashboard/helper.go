@@ -94,7 +94,7 @@ func GetTechStack(repos []Repo) TechStack {
 		growthTrend[i].Percentage = float64(growthTrend[i].Size) / float64(total) * 100
 	}
 
-	return TechStack{Languages: languages, GrowthTrend: growthTrend[:3]}
+	return TechStack{Languages: languages, GrowthTrend: growthTrend[:min(3, len(growthTrend))]}
 }
 
 func TopRepos(repos []Repo) []TopRepo {
@@ -128,6 +128,7 @@ func TopRepos(repos []Repo) []TopRepo {
 			}{
 				Name: repo.License.Name,
 			},
+			Homepage: repo.Homepage,
 		}
 		ans = append(ans, topRepos)
 	}
@@ -151,11 +152,11 @@ func TopRepos(repos []Repo) []TopRepo {
 		return false
 	})
 
-	return ans[:5]
+	return ans[:min(5, len(ans))]
 }
 
 func GetOpenSourceContributions(un string) (*OpenSource, error) {
-	url := fmt.Sprintf("%s/search/issues?q=author:%s+type:pr+is:merged&sort=updated&per_page=6&page=1", GitHubRESTBaseURL, un)
+	url := fmt.Sprintf("%s/search/issues?q=author:%s+type:pr+is:merged&sort=updated&order=desc&per_page=6&page=1", GitHubRESTBaseURL, un)
 	data, err := MakeRESTRequest(url, nil)
 	if err != nil {
 		return nil, err
@@ -258,7 +259,7 @@ func GetRecentActivity(username string, pc *ProfileCard) ([]Events, error) {
 	}
 
 	pc.CodingHabit = classifyCodingHabit(events)
-	return events[:5], nil
+	return events[:min(5, len(events))], nil
 }
 
 func GetContributions(un string) (*GraphQLResponse, error) {
