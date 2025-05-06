@@ -4,6 +4,7 @@ import { Line } from 'react-chartjs-2'
 
 import languageColors from '../data/colors.json';
 import './techStack.css'
+import type { Language, TechStack } from './types/techStack';
 
 defaults.maintainAspectRatio = false
 defaults.responsive = true
@@ -15,18 +16,17 @@ defaults.plugins.title.font = {
     weight: 600
 }
 
-interface Language {
-    name: string
-    size: number
-    percentage: number
-}
-
-interface TechStack {
-    languages: Language[]
-    growth_trend: Language[]
-}
-
 function Language({ languages }: { languages: Language[] }) {
+
+    if (!languages || !languages.length) {
+        return (
+            <div className='card mb-6'>
+                <h5 className='mb-6'>Most used languages</h5>
+                <p className='text-center text-(--text-light-100) text-sm'>No languages found</p>
+            </div>
+        )
+    }
+
     const data = languages.map((lang: Language) => {
         return {
             id: lang.name,
@@ -58,6 +58,14 @@ function Language({ languages }: { languages: Language[] }) {
 
 
 function GrowthTrend({ languages }: { languages: Language[] }) {
+    if (!languages || !languages.length) {
+        return (
+            <div className='card'>
+                <h5 className='mb-6'>Growth trend</h5>
+                <p className='text-center text-(--text-light-100) text-sm'>No growth trend found</p>
+            </div>
+        )
+    }
     languages.sort((a, b) => a.percentage - b.percentage)
     const xAxis = languages.map((lang: Language) => lang.name)
     const data = languages.map((lang: Language) => lang.size)

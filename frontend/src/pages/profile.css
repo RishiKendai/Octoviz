@@ -1,19 +1,17 @@
 .card {
-    /* height: 192px; */
-    /* width: 336px; */
     padding: 32px 24px;
     border-radius: 14px;
-    /* From https://css.glass */
     background: #CBCCCD08;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.18);
     backdrop-filter: blur(53px);
     -webkit-backdrop-filter: blur(53px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 10;
 }
 
 .card-dark {
-    background: #CBCCCD12;
+    background: hsl(0, 0%, 0%, 23%);
 }
 
 .loader {

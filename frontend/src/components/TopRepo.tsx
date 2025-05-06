@@ -1,26 +1,15 @@
 import moment from 'moment';
 import languageColors from '../data/colors.json';
-
-type TopRepo = {
-    name: string;
-    description: string;
-    forks_count: number;
-    fork: boolean;
-    html_url: string;
-    language: string;
-    languages: {
-        [key: string]: number
-    }
-    stargazers_count: number;
-    watchers_count: number;
-    updated_at: string;
-    created_at: string;
-    license: {
-        name: string
-    }
-}
+import type { TopRepo } from './types/topRepos';
+import { formatNumber } from './utils/helper';
 
 function TopRepo({ topRepos }: { topRepos: TopRepo[] }) {
+    if (!topRepos || !topRepos.length) return (
+        <div className='card mb-6 w-full'>
+            <h5 className='text-lg mb-6'>Top Repositories</h5>
+            <p className='text-center text-(--text-light-100) text-sm'>No such repositories found</p>
+        </div>
+    )
     topRepos.length = 5
     return (
         <div className='card mb-6 w-full'>
@@ -66,13 +55,19 @@ const Repo: React.FC<{ repo: TopRepo }> = ({ repo }) => {
         Object.keys(repo.languages ?? {})[0] ||
         ''
     return (
-        <div className="repo-item flex flex-col justify-between w-full">
+        <div className="repo-item flex flex-col justify-between items-start w-full">
             <div className="mb-2">
                 <div className="repo-name">
                     <a className='text-xl wrap-anywhere text-[#4493f8] hover:underline hover:underline-offset-4' href={repo.html_url} target="_blank" rel="noopener noreferrer">{repo.name}</a>
                     <span className="repo-visibility text-xs border border-[#3d444d] text-(--text-light-100) px-1.5 leading-[18px] rounded-full ml-1 mb-1">{repo.fork ? 'Forked' : 'Owner'}</span>
                 </div>
                 {repo.description && <div className="repo-description mt-2 mb-1 text-sm text-(--text-light-500)">{repo.description}</div>}
+                {repo.homepage && <span className='text-sm  py-[3px] hover:text-[#4493f8] hover:underline hover:underline-offset-4 mr-2 leading-[21px] '>
+                    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" fill='white' className="inline mr-2">
+                        <path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path>
+                    </svg>
+                    <a href={repo.homepage} className='w-fit' target="_blank" rel="noopener noreferrer">Homepage</a>
+                </span>}
                 <div className="block mt-2">
                     {language && <span className='repo-language-name mr-4'>
                         <span className="repo-language-color h-3 w-3 top-0.5 list-disc rounded-full border inline-block relative border-[#ffffff56] mr-1" style={{ backgroundColor: getColorCode(language) }}></span>
@@ -97,7 +92,7 @@ const Repo: React.FC<{ repo: TopRepo }> = ({ repo }) => {
                             <path d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"></path></svg>
                     </span>
                     Watchers
-                    <span className='ml-2 px-1.5 border border-[#3d444d] rounded-xl bg-[#2f3742] leading-[18px] h-5 text-center align-top'>{repo.watchers_count}</span>
+                    <span className='ml-2 px-1.5 border border-[#3d444d] rounded-xl bg-[#2f3742] leading-[18px] h-5 text-center align-top'>{formatNumber(repo.watchers_count)}</span>
                 </span>
                 <span className="repo-forks flex items-center justify-center px-2 py-[3px] border border-[#3d444d] rounded-[0.375rem] text-xs bg-[#212830] text-(--text-light-500) mr-2 leading-[21px] mb-2">
                     <span className='mr-1'>
@@ -106,7 +101,7 @@ const Repo: React.FC<{ repo: TopRepo }> = ({ repo }) => {
                         </svg>
                     </span>
                     Forks
-                    <span className='ml-2 px-1.5 border border-[#3d444d] rounded-xl bg-[#2f3742] leading-[18px] h-5 text-center align-top'>{repo.forks_count}</span>
+                    <span className='ml-2 px-1.5 border border-[#3d444d] rounded-xl bg-[#2f3742] leading-[18px] h-5 text-center align-top'>{formatNumber(repo.forks_count)}</span>
                 </span>
                 <span className="repo-stars flex items-center justify-center px-2 py-[3px] border border-[#3d444d] rounded-[0.375rem] text-xs bg-[#212830] text-(--text-light-500) mr-2 leading-[21px] mb-2">
                     <span className='mr-1'>
@@ -115,7 +110,7 @@ const Repo: React.FC<{ repo: TopRepo }> = ({ repo }) => {
                         </svg>
                     </span>
                     Stars
-                    <span className='ml-2 px-1.5 border border-[#3d444d] rounded-xl bg-[#2f3742] leading-[18px] h-5 text-center align-top'>{repo.stargazers_count}</span>
+                    <span className='ml-2 px-1.5 border border-[#3d444d] rounded-xl bg-[#2f3742] leading-[18px] h-5 text-center align-top'>{formatNumber(repo.stargazers_count)}</span>
                 </span>
             </div>
         </div>

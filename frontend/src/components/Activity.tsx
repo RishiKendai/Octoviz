@@ -1,9 +1,17 @@
-import { CreateEventPayload, ForkEventPayload, GitHubEvent, IssuesEventPayload, PullRequestEventPayload, PushEventPayload } from './activityTypes'
+import { CreateEventPayload, ForkEventPayload, GitHubEvent, IssuesEventPayload, PullRequestEventPayload, PushEventPayload } from './types/activity'
 import moment from 'moment';
 
 import './activity.css'
 
 function Activity({ activity }: { activity: GitHubEvent[] }) {
+
+    if (!activity || !activity.length) return (
+        <div className='card mb-6 w-full'>
+            <h5 className='text-lg mb-6'>Recent Activity</h5>
+            <p className='text-center text-(--text-light-100) text-sm'>This space is a bit quiet</p>
+        </div>
+    )
+
     return (
         <div className='flex flex-col card transparent'>
             <h5 className='mb-6'>Recent Activity</h5>

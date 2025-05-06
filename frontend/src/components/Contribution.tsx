@@ -1,24 +1,16 @@
 import moment from 'moment'
 import './contribution.css'
-
-type Item = {
-  created_at: string,
-  repository_url: string,
-  state: string,
-  title: string,
-  updated_at: string,
-  user: {
-    login: string,
-  }
-}
-
-type ContributionProps = {
-  incomplete_results: boolean,
-  items: Item[],
-  total_count: number,
-}
+import { ContributionProps, Item } from './types/contribution'
 
 function Contribution({ contribution }: { contribution: ContributionProps }) {
+  if (!contribution || !contribution.items.length) return (
+    <div className="card mb-6">
+      <h5 className='mb-6'>Recent Contribution</h5>
+      <p className="text-center text-(--text-light-100) text-sm">No contribution yet...</p>
+    </div>
+
+  )
+
   return (
     <div className="card mb-6">
       <h5 className='mb-6'>Recent Contribution</h5>
@@ -40,9 +32,9 @@ function Contribution({ contribution }: { contribution: ContributionProps }) {
                   <a className='text-[#4493f8] hover:underline hover:underline-offset-4' href={repoURL}>{repo}</a>
                 </span>
               </div>
-              <div className='mt-2'>
+              <div className='mt-2 flex flex-wrap gap-y-2'>
                 <span className='mr-4 bg-[#7407FC86] capitalize text-white border border-[#3d444d] px-2 py-[3px] text-xs rounded-[0.375rem]'>{item.state}</span>
-                <span className='text-sm/[18px] list-disc text-(--text-light-100)'>Created on {moment(item.created_at).format('MMM D, YYYY')}</span>
+                <span className='text-sm/[18px] whitespace-nowrap text-(--text-light-100)'>Created on {moment(item.created_at).format('MMM D, YYYY')}</span>
               </div>
             </div>
           </li>)
