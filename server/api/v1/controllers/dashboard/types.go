@@ -30,7 +30,9 @@ type ProfileCard struct {
 	Score       int    `json:"score"`
 	Location    string `json:"location"`
 	GithubLink  string `json:"github_link"`
-	AKA         string
+	AKA         string `json:"aka"`
+	Repos       int    `json:"repos"`
+	Joined      string `json:"joined"`
 }
 
 type Gists struct {
@@ -101,6 +103,7 @@ type TopRepo struct {
 	License     struct {
 		Name string `json:"name"`
 	} `json:"license"`
+	Homepage string `json:"homepage"`
 }
 
 type CommitsAndForks struct {
@@ -132,6 +135,7 @@ type Repo struct {
 	ForksCount      int    `json:"forks_count"`
 	OpenIssuesCount int    `json:"open_issues_count"`
 	Language        string `json:"language"`
+	Homepage        string `json:"homepage"`
 	Languages       map[string]int
 	License         struct {
 		Name string `json:"name"`
