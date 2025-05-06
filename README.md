@@ -1,7 +1,7 @@
 # **Octoviz**  
 *A GitHub Developer Profile Analyzer*
 
-![Demo Screenshot](./src/assets/demo.png) <!-- Replace with actual image path -->
+![Demo Screenshot](frontend/src/assets/demo.png) <!-- Replace with actual image path -->
 
 Octoviz lets you explore and visualize a GitHub user's public profile data in a clean, interactive format. Just paste a GitHub profile URL to see insights like top repositories, most used languages, and recent contribution activity.
 
