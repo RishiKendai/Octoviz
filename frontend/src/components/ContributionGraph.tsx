@@ -47,9 +47,10 @@ function ContributionGraph({ contribution }: { contribution: ContributionGraphPr
     const contributionLabel = isCurrentYearDominant
         ? 'Contributions this year'
         : 'Contributions in the last year';
+
     return (
         // <div className='card card-dark w-[733px] max-w-[733px]'>
-        <div className='card card-dark w-full mb-6 overflow-x-auto'>
+        <div className='card card-dark mb-6 w-full overflow-x-auto md:w-fit lg:w-full md:mx-auto'>
             <div className='flex items-start sticky left-0 mb-6'>
                 <h5 className='text-base'>{totalContributions} {contributionLabel}</h5>
                 <span className='ml-auto px-2 py-[3px] border border-[#3d444d] rounded-[0.375rem] text-xs bg-[#212830] text-(--text-light-500)'>{new Date().getFullYear()}</span>
@@ -83,10 +84,7 @@ function ContributionGraph({ contribution }: { contribution: ContributionGraphPr
                                             if (!day) return ''
                                             const tooltipText = `${day.contributionCount > 0 ? day.contributionCount : "No"} contributions on ${formatDate(day.date)}`;
                                             return (
-                                                <td key={weekIndex} className='contribution-calendar-day w-2.5 min-w-2.5' style={{ backgroundColor: day.color === '#ebedf0' ? '#CBCCCD18' : day.color, border: day.color === '#ebedf0' ? '0.5px solid #ffffff0d' : 'none' }}>
-                                                    <span className='tooltip'>
-                                                        {tooltipText}
-                                                    </span>
+                                                <td title={tooltipText} key={weekIndex} className='contribution-calendar-day w-2.5 min-w-2.5' style={{ backgroundColor: day.color === '#ebedf0' ? '#CBCCCD18' : day.color, border: day.color === '#ebedf0' ? '0.5px solid #ffffff0d' : 'none' }}>
                                                 </td>
                                             )
                                         })
