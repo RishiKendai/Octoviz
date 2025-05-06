@@ -1,6 +1,6 @@
 
 import moment from 'moment'
-import './ContributionGraph.css'
+import './contributionGraph.css'
 import { ContributionGraphProps } from './types/contributionGraph';
 import { formatNumber } from './utils/helper';
 
