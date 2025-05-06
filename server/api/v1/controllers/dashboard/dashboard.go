@@ -21,9 +21,16 @@ func ProfileAnalyze(c *gin.Context) {
 
 	//? Get user data
 	data, err := MakeRESTRequest(user_url, nil)
-	if err != nil {
-		log.Println("Error fetching user data :: ", err)
-		response.SendBadRequestError(c, "Invalid Github user name", nil)
+
+	var raw map[string]any
+	if err := json.Unmarshal(data, &raw); err != nil {
+		log.Println("Invalid payload :: ", err)
+		response.SendServerError(c, err, nil)
+		return
+	}
+
+	if status, ok := raw["status"].(string); ok && status == "404" {
+		response.SendNotFoundError(c, "User not found", nil)
 		return
 	}
 
