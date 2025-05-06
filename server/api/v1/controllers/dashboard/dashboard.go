@@ -49,6 +49,8 @@ func ProfileAnalyze(c *gin.Context) {
 		CodingHabit: "",
 		Location:    user.Location,
 		GithubLink:  user.HTMLURL,
+		Repos:       0,
+		Joined:      user.Joined,
 	}
 
 	score := 0.0
@@ -108,6 +110,7 @@ func ProfileAnalyze(c *gin.Context) {
 	case err := <-errChan:
 		log.Fatal(err)
 	case repos := <-reposChan:
+		profileCard.Repos = len(repos)
 		go func() {
 			defer wg.Done()
 			//? user tech stack
@@ -158,7 +161,7 @@ func ProfileAnalyze(c *gin.Context) {
 	wg.Wait()
 
 	response.SendJSON(c, gin.H{
-		"profileCard":             profileCard,
+		"profile":                 profileCard,
 		"bio":                     bio,
 		"techStack":               techStack,
 		"topRepos":                topRepos,
