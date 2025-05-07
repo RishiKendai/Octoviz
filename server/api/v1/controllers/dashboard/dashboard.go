@@ -5,7 +5,7 @@ import (
 	"log"
 	"sync"
 
-	"dev-profile/pkg/config/response"
+	"github.com/RishiKendai/Octoviz/pkg/config/response"
 
 	"github.com/gin-gonic/gin"
 )

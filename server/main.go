@@ -1,9 +1,9 @@
 package main
 
 import (
-	"dev-profile/api/v1/routes"
-	"dev-profile/middleware"
-	"dev-profile/pkg/config/env"
+	"github.com/RishiKendai/Octoviz/api/v1/routes"
+	"github.com/RishiKendai/Octoviz/middleware"
+	"github.com/RishiKendai/Octoviz/pkg/config/env"
 
 	"github.com/gin-gonic/gin"
 )

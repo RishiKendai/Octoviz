@@ -1,4 +1,4 @@
-module dev-profile
+module github.com/RishiKendai/Octoviz
 
 go 1.23.4
 

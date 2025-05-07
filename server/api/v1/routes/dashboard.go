@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"dev-profile/api/v1/controllers/dashboard"
+	"github.com/RishiKendai/Octoviz/api/v1/controllers/dashboard"
 
 	"github.com/gin-gonic/gin"
 )

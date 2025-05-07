@@ -2,11 +2,12 @@ package dashboard
 
 import (
 	"bytes"
-	"dev-profile/pkg/config/env"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
+
+	"github.com/RishiKendai/Octoviz/pkg/config/env"
 )
 
 func MakeGraphqlRequest(url string, payload string) ([]byte, error) {
