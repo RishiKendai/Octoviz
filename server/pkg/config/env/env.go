@@ -7,12 +7,13 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func CheckEnv() string {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Println("❗Error loading .env file but will try from the environment variable")
+func CheckEnv() {
+	if os.Getenv("GIN_MODE") != "release" {
+		err := godotenv.Load(".env")
+		if err != nil {
+			fmt.Println("❗Error loading .env file but will try from the environment variable")
+		}
 	}
-	return "success"
 }
 
 func EnvPort() string {
