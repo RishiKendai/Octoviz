@@ -18,7 +18,7 @@ function TextWrapper({ title, value }: { title: string, value: string | null }):
 
 function Bio({ bio }: { bio: Bio }): JSX.Element {
     return (
-        <div className='bio card-dark card sticky top-1.5 md:min-w-[260px]'>
+        <div className='bio card-dark card md:sticky top-1.5 md:min-w-[260px]'>
             <h5 className="mb-6">User Bio</h5>
             <TextWrapper title='Name' value={bio.name} />
             <TextWrapper title='Bio' value={bio.bio} />

@@ -6,7 +6,7 @@ import TechStack from '../components/TechStack'
 
 import './profile.css'
 import TopRepo from '../components/TopRepo'
-import ContributionGraph from '../components/ContributionGraph'
+import ContributionGraph from '../components/ContributionGraph.tsx'
 import Contribution from '../components/Contribution'
 import Notfound from './Notfound'
 import { useParams } from 'react-router-dom'

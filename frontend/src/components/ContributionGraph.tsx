@@ -11,30 +11,29 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 const formatDate = (date: string) => moment(date).format("MMMM Do")
 
 function ContributionGraph({ contribution }: { contribution: ContributionGraphProps }) {
-    const { weeks } = contribution.data.user.contributionsCollection.contributionCalendar;
+    const { weeks: contributionWeeks } = contribution.data.user.contributionsCollection.contributionCalendar;
 
     const monthPair: [string, number][] = []
-
-    let currentMonth = new Date(contribution.data.user.contributionsCollection.contributionCalendar.weeks[0].contributionDays[0].date).getMonth() + 1
+    let currentMonth = new Date(contributionWeeks[0].contributionDays[0].date).getMonth() + 1
     let currentSpan = 0;
     const yearCounts: Record<number, number> = {};
 
-    contribution.data.user.contributionsCollection.contributionCalendar.weeks.forEach((week, i) => {
+    contributionWeeks.forEach((week, i) => {
         for (let j = 0; j < week.contributionDays.length; j++) {
             const date = new Date(week.contributionDays[j].date);
             const month = date.getMonth() + 1;
             const year = date.getFullYear();
             yearCounts[year] = (yearCounts[year] || 0) + 1;
 
-            if (month === currentMonth) {
+            if (month === currentMonth && i < contributionWeeks.length - 1) {
                 continue;
             } else {
-                const totalSpan = i - currentSpan;
-                if (totalSpan > 0) {
+                const totalSpan = i + 1 - currentSpan;
+                if (totalSpan > 1) {
                     monthPair.push([MONTHS[currentMonth - 1], totalSpan])
                 }
                 currentMonth = month;
-                currentSpan = i;
+                currentSpan = i + 1;
             }
         }
     })
@@ -79,7 +78,7 @@ function ContributionGraph({ contribution }: { contribution: ContributionGraphPr
                                         <span style={{ clipPath: dayIndex & 1 ? 'none' : 'Circle(0)' }}>{DAYS[dayIndex]}</span>
                                     </td>
                                     {
-                                        weeks.map((week, weekIndex) => {
+                                        contributionWeeks.map((week, weekIndex) => {
                                             const day = week.contributionDays[dayIndex];
                                             if (!day) return ''
                                             const tooltipText = `${day.contributionCount > 0 ? day.contributionCount : "No"} contributions on ${formatDate(day.date)}`;

@@ -61,7 +61,7 @@ const Repo: React.FC<{ repo: TopRepo }> = ({ repo }) => {
                     <a className='text-xl wrap-anywhere text-[#4493f8] hover:underline hover:underline-offset-4' href={repo.html_url} target="_blank" rel="noopener noreferrer">{repo.name}</a>
                     <span className="repo-visibility text-xs border border-[#3d444d] text-(--text-light-100) px-1.5 leading-[18px] rounded-full ml-1 mb-1">{repo.fork ? 'Forked' : 'Owner'}</span>
                 </div>
-                {repo.description && <div className="repo-description mt-2 mb-1 text-sm text-(--text-light-500)">{repo.description}</div>}
+                {repo.description && <div className="w-full mt-2 mb-1 text-sm text-(--text-light-500)">{repo.description}</div>}
                 {repo.homepage && <span className='text-sm  py-[3px] hover:text-[#4493f8] hover:underline hover:underline-offset-4 mr-2 leading-[21px] '>
                     <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" fill='white' className="inline mr-2">
                         <path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path>
