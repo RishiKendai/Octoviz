@@ -4,6 +4,7 @@ import (
 	"github.com/RishiKendai/Octoviz/api/v1/routes"
 	"github.com/RishiKendai/Octoviz/middleware"
 	"github.com/RishiKendai/Octoviz/pkg/config/env"
+	"github.com/gin-contrib/gzip"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,10 +13,10 @@ func main() {
 	port := env.EnvPort()
 
 	router := gin.Default()
+	router.Use(gzip.Gzip(gzip.BestCompression))
 
 	// Middleware
 	router.Use(middleware.CORSMiddleware())
-	router.Use(middleware.SaveRequestBody)
 	router.Use(middleware.ErrorHandler)
 	router.Use(middleware.SecurityHeaders())
 
